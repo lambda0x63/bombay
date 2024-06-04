@@ -1,7 +1,7 @@
-#test_rag_pipeline_unit.py
+#test_bombay_pipeline_unit.py
 import pytest
 import os
-from rag_pipeline_ops import RAGPipeline, HNSWLib, ChromaDB
+from bombay.pipeline import RAGPipeline, HNSWLib, ChromaDB
 from dotenv import load_dotenv
 
 load_dotenv()

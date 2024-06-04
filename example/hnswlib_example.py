@@ -1,5 +1,5 @@
 # hnswlib_example.py
-from bombay import create_pipeline, run_pipeline
+from bombay.pipeline import create_pipeline, run_pipeline
 from dotenv import load_dotenv
 import os
 

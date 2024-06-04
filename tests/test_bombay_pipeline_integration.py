@@ -1,6 +1,6 @@
-# test_rag_pipeline_integration.py
+# test_bombay_pipeline_integration.py
 import pytest
-from rag_pipeline_ops import create_pipeline, run_pipeline
+from bombay.pipeline import create_pipeline, run_pipeline
 from unittest.mock import patch, MagicMock
 from dotenv import load_dotenv
 import os
