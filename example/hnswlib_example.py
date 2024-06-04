@@ -4,10 +4,8 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-# OpenAI API 키 설정
 api_key = os.getenv("OPENAI_API_KEY")
 
-# Bombay 파이프라인 생성
 pipeline = create_pipeline(
    embedding_model_name='openai',
    query_model_name='gpt-3',

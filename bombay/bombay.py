@@ -1,4 +1,4 @@
-#rag_pipeline_ops.py
+#bombay.py
 import platform
 import numpy as np
 import hnswlib
