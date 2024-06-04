@@ -1,0 +1,8 @@
+.venv
+.pytest_cache
+__pycache__
+.env
+chromadb_persist
+*.egg-info
+build
+dist

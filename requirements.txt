@@ -1,0 +1,5 @@
+numpy
+hnswlib
+openai
+pytesta
+chromadb
