@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='bombay',
-    version='0.1.3',
+    version='0.1.4',
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
@@ -16,7 +16,8 @@ setup(
         'chromadb',
         'termcolor',
         'colorama',
-        'pyfiglet'
+        'pyfiglet',
+        'rich'        
     ],
     author='faith6',
     author_email='root39293@gmail.com',

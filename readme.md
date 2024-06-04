@@ -1,4 +1,3 @@
-
 # Bombay Pipeline
 
 Bombay는 RAG (Retrieval-Augmented Generation) 기반의 LLM (Large Language Model)을 쉽게 구축하고 활용할 수 있도록 하는 파이프라인 구축 시스템입니다. 
@@ -14,37 +13,43 @@ Bombay는 RAG (Retrieval-Augmented Generation) 기반의 LLM (Large Language Mod
 
 1. 해당 라이브러리를 `pip`으로 설치:
 ~~~bash
-pip install bombay
+$ pip install bombay
 ~~~
 
 ## 사용 방법
 
 ### 1. Bombay 프로젝트 생성
 
-Bombay CLI를 사용하여 새 프로젝트를 생성할 수 있습니다. 다음 명령어를 사용하여 CLI를 실행하고 프로젝트를 생성합니다:
+Bombay CLI를 사용하여 새 프로젝트를 생성할 수 있습니다. 다음 명령어를 사용하여 CLI를 실행합니다:
 
 ~~~bash
-bombay create
+$ bombay
 ~~~
 
-프로젝트 생성 과정에서는 프로젝트 이름, 임베딩 모델, 질의 모델, 벡터 데이터베이스 등을 선택할 수 있습니다. 생성된 프로젝트는 다음과 같은 디렉토리 구조를 가집니다:
+프로젝트 생성 과정에서는 프로젝트 이름, 임베딩 모델, 질의 모델, 벡터 데이터베이스 등을 선택할 수 있습니다. 추후 세부기능을 업데이트 할 예정이며 현재 간단하게 지원되는 템플릿은 다음과 같습니다:
 
-~~~
+- Basic: 최소한의 설정으로 기본적인 파이프라인을 생성합니다.
+- Chatbot: 대화형 단일 채팅 기능을 포함한 파이프라인을 생성합니다.
+- Web App: FastAPI를 사용하여 웹 애플리케이션으로 파이프라인을 생성합니다.
+
+생성된 프로젝트는 다음과 같은 디렉토리 구조를 가집니다:
+
+~~~bash
 <project_name>/
 ├── main.py
-└── example.py
+└── .env
 ~~~
 
-`main.py`와 `example.py` 파일은 생성된 RAG 파이프라인을 사용하여 문서를 추가하고 질의를 수행하는 예제를 포함하고 있습니다.
+`main.py` 파일은 선택한 템플릿에 따라 생성된 RAG 파이프라인 코드를 포함하고 있습니다. `.env` 파일에는 환경변수 키가 저장됩니다.
 
-### 2. Bombay 파이프라인 생성
+### 2. Bombay 파이프라인 이해하기
 
 `create_pipeline()` 함수를 사용하여 Bombay 파이프라인을 생성합니다. 이 함수는 Bombay 파이프라인의 구성 요소를 설정하고 초기화하는 역할을 합니다. 다음 매개변수를 설정할 수 있습니다:
 
 - `embedding_model_name`: 사용할 임베딩 모델의 이름입니다. 현재는 'openai'만 지원되며, OpenAI의 text-embedding-ada-002 모델을 사용합니다. 이 모델은 텍스트를 고정 길이의 벡터로 변환하는 역할을 합니다.
 - `query_model_name`: 사용할 질의 모델의 이름입니다. 현재는 'gpt-3'만 지원되며, OpenAI의 gpt-3.5-turbo 모델을 사용합니다. 이 모델은 검색된 문서를 기반으로 질의에 대한 응답을 생성하는 역할을 합니다.
 - `vector_db`: 사용할 벡터 데이터베이스의 이름입니다. 'hnswlib' 또는 'chromadb'를 선택할 수 있습니다. 벡터 데이터베이스는 임베딩 벡터를 저장하고 유사도 기반 검색을 수행하는 역할을 합니다.
-- `api_key`: OpenAI API 키를 입력합니다. OpenAI의 임베딩 모델과 질의 모델을 사용하기 위해 필요합니다.
+- `api_key`: OpenAI API 키를 할당합니다. OpenAI의 임베딩 모델과 질의 모델을 사용하기 위해 필요합니다.
 - `similarity`: 유사도 측정 방식을 설정합니다. 기본값은 'cosine'입니다.
 - `use_persistent_storage`: ChromaDB 사용 시, 데이터 지속성 여부를 설정합니다. 기본값은 False입니다. True로 설정하면 ChromaDB가 데이터를 디스크에 영구적으로 저장하여 프로그램 종료 후에도 데이터를 유지할 수 있습니다.
 
@@ -142,27 +147,11 @@ Answer: 고양이는 수면 시간이 많아 하루 평균 15~20시간을 잡니
 - `VectorDB`, `EmbeddingModel`, `QueryModel` 추상 클래스를 정의하여 벡터 데이터베이스, 임베딩 모델, 질의 모델에 대한 추상화 제공
 - 다양한 구현체를 유연하게 사용할 수 있도록 인터페이스 설계
 
-### 단일 책임 원칙(Single Responsibility Principle)
-- 각 클래스는 단일 책임을 가지도록 설계
-- `VectorDB`는 벡터 데이터베이스 관련 기능, `EmbeddingModel`은 임베딩 관련 기능, `QueryModel`은 질의 관련 기능을 담당
-
-### 개방-폐쇄 원칙(Open-Closed Principle)
-- 추상 클래스와 인터페이스 사용으로 새로운 구현체 추가는 개방, 기존 코드 수정 없이 확장 가능
-
-### 의존 관계 주입(Dependency Injection)
-- `RAGPipeline` 클래스는 생성자를 통해 필요한 의존성(`embedding_model`, `query_model`, `vector_db`) 주입 받음
-- 의존성 관리와 테스트 용이성 향상
-
 ### 팩토리 패턴(Factory Pattern)
-- `create_pipeline` 함수는 팩토리
-
- 패턴의 역할 수행
+- `create_pipeline` 함수는 팩토리 패턴의 역할 수행
 - 주어진 인자에 따라 적절한 임베딩 모델, 질의 모델, 벡터 데이터베이스 선택하여 RAG 파이프라인 생성
 
 ### 어댑터 패턴(Adapter Pattern)
 - `OpenAIEmbedding`과 `OpenAIQuery` 클래스는 어댑터 패턴 사용
 - OpenAI의 API를 추상화된 인터페이스에 맞게 적용
 
-### 템플릿 메소드 패턴(Template Method Pattern)
-- `RAGPipeline` 클래스의 `search_and_answer` 메소드는 템플릿 메소드 패턴과 유사한 구조
-- 일련의 알고리즘 단계를 정의하고, 각 단계는 하위 클래스 또는 의존성에 의해 구현
