@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='bombay',
-    version='0.1.3',
+    version='0.1.0',
     packages=find_packages(),
     install_requires=[
         'numpy',
@@ -16,7 +16,7 @@ setup(
     ],
     author='faith6',
     author_email='root39293@gmail.com',
-    description='A package for RAG Pipeline Operations',
+    description='A package for building RAG-based LLM pipelines',
     long_description=long_description,
     long_description_content_type='text/markdown',
     classifiers=[
