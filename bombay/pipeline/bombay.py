@@ -1,4 +1,4 @@
-#bombay.py
+#bombay/pipeline/bombay.py
 import platform
 import numpy as np
 import hnswlib
