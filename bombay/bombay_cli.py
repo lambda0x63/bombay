@@ -70,9 +70,8 @@ pipeline = create_pipeline(
     print(colored("                 Next steps                 ", 'yellow'))
     print(colored("="*50, 'yellow'))
     print(colored(f"1. cd {project_name}", 'cyan'))
-    print(colored("2. Run 'pip install bombay' to install the Bombay package", 'cyan'))
-    print(colored("3. Modify main.py to add your documents and perform searches", 'cyan'))
-    print(colored("4. Run 'python main.py' to execute the project", 'cyan'))
+    print(colored("2. Easily implement a RAG system with pipelines in main.py", 'cyan'))
+    print(colored("3. Run 'main.py' That's it!", 'cyan'))
 
 def create_example_file(project_name, embedding_model, query_model, vector_db, api_key):
     example_content = f"""from bombay.pipeline import create_pipeline, run_pipeline
