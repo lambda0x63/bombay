@@ -10,14 +10,14 @@ def print_welcome_message():
     print(colored(ascii_banner, 'cyan'))
     print(colored("Welcome to the Bombay CLI Project Creator!", 'yellow'))
     print(colored("="*50, 'yellow'))
-    print(colored("        Let's create something amazing!        ", 'yellow'))
+    print(colored("        Let's create RAG System simply!        ", 'yellow'))
     print(colored("="*50, 'yellow'))
     print()
 
 def select_option(prompt: str, options: list) -> str:
     print(colored(prompt, 'green'))
     for i, option in enumerate(options):
-        print(f"{i + 1}. {option}")
+        print(colored(f"{i + 1}. {option}", 'white'))
     while True:
         try:
             choice = int(input(colored("Select an option: ", 'blue'))) - 1
@@ -32,13 +32,13 @@ def create_project():
     """Create a new Bombay project."""
     print_welcome_message()
 
-    project_name = input(colored("Enter project name: ", 'blue'))
+    project_name = input(colored("Enter project name: ", 'blue')).strip()
 
     embedding_model = select_option("Select embedding model:", ["openai"])
     query_model = select_option("Select query model:", ["gpt-3"])
     vector_db = select_option("Select vector database:", ["chromadb", "hnswlib"])
 
-    api_key = input(colored("Enter OpenAI API key (leave blank to set later): ", 'blue'))
+    api_key = input(colored("Enter OpenAI API key (leave blank to set later): ", 'blue')).strip()
     if not api_key:
         api_key = "your-api-key-here"
 
@@ -76,10 +76,6 @@ pipeline = create_pipeline(
 
 def create_example_file(project_name, embedding_model, query_model, vector_db, api_key):
     example_content = f"""from bombay.pipeline import create_pipeline, run_pipeline
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 # OpenAI API key setup
 api_key = '{api_key}'
