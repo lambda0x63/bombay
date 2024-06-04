@@ -1,5 +1,7 @@
 numpy
 hnswlib
 openai
-pytesta
 chromadb
+termcolor
+colorama
+pyfiglet
