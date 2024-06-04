@@ -1,6 +1,6 @@
 # test_rag_pipeline_integration.py
 import pytest
-from rag_pipeline_ops import create_rag_pipeline, run_rag_pipeline
+from rag_pipeline_ops import create_pipeline, run_pipeline
 from unittest.mock import patch, MagicMock
 from dotenv import load_dotenv
 import os
@@ -31,7 +31,7 @@ def test_rag_pipeline_with_hnswlib(MockOpenAIQuery, MockOpenAIEmbedding, sample_
     mock_query_instance.generate.return_value = "This is a mock answer."
     
     api_key = os.getenv("OPENAI_API_KEY")
-    pipeline = create_rag_pipeline(
+    pipeline = create_pipeline(
         embedding_model_name='openai',
         query_model_name='gpt-3',
         vector_db='hnswlib',
@@ -39,7 +39,7 @@ def test_rag_pipeline_with_hnswlib(MockOpenAIQuery, MockOpenAIEmbedding, sample_
         similarity='cosine'
     )
     pipeline.add_documents(sample_documents)
-    result = run_rag_pipeline(pipeline, sample_documents, sample_query, k=3)
+    result = run_pipeline(pipeline, sample_documents, sample_query, k=3)
     assert result['query'] == sample_query
     assert len(result['relevant_docs']) == 3
 
@@ -54,7 +54,7 @@ def test_rag_pipeline_with_chromadb(MockOpenAIQuery, MockOpenAIEmbedding, sample
     mock_query_instance.generate.return_value = "This is a mock answer."
     
     api_key = os.getenv("OPENAI_API_KEY")
-    pipeline = create_rag_pipeline(
+    pipeline = create_pipeline(
         embedding_model_name='openai',
         query_model_name='gpt-3',
         vector_db='chromadb',
@@ -63,6 +63,6 @@ def test_rag_pipeline_with_chromadb(MockOpenAIQuery, MockOpenAIEmbedding, sample
         use_persistent_storage=True
     )
     pipeline.add_documents(sample_documents)
-    result = run_rag_pipeline(pipeline, sample_documents, sample_query, k=3)
+    result = run_pipeline(pipeline, sample_documents, sample_query, k=3)
     assert result['query'] == sample_query
     assert len(result['relevant_docs']) == 3

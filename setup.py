@@ -4,7 +4,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='rag_pipeline_ops',
+    name='bombay',
     version='0.1.3',
     packages=find_packages(),
     install_requires=[

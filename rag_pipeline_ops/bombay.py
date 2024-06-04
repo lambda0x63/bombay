@@ -1,3 +1,4 @@
+#rag_pipeline_ops.py
 import platform
 import numpy as np
 import hnswlib
@@ -375,7 +376,7 @@ class OpenAIQuery(QueryModel):
         return response.choices[0].message.content
 
 # RAG 파이프라인 생성 함수
-def create_rag_pipeline(embedding_model_name, query_model_name, vector_db, api_key, similarity='cosine', use_persistent_storage=False, **kwargs):
+def create_pipeline(embedding_model_name, query_model_name, vector_db, api_key, similarity='cosine', use_persistent_storage=False, **kwargs):
     """
     RAG 파이프라인을 생성하는 함수
     :param embedding_model_name: 임베딩 모델 이름
@@ -408,7 +409,7 @@ def create_rag_pipeline(embedding_model_name, query_model_name, vector_db, api_k
         return RAGPipeline(embedding_model, query_model, vector_db, similarity, **kwargs)
 
 # RAG 파이프라인 실행 함수
-def run_rag_pipeline(pipeline, documents, query, k=1, threshold=None):
+def run_pipeline(pipeline, documents, query, k=1, threshold=None):
     """
     RAG 파이프라인을 실행하는 함수
     :param pipeline: RAG 파이프라인 인스턴스

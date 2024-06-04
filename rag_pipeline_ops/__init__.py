@@ -1,4 +1,5 @@
-from rag_pipeline_ops import (
+#__init__.py
+from bombay import (
     VectorDB,
     HNSWLib,
     ChromaDB,
@@ -7,8 +8,8 @@ from rag_pipeline_ops import (
     QueryModel,
     OpenAIQuery,
     RAGPipeline,
-    create_rag_pipeline,
-    run_rag_pipeline,
+    create_pipeline,
+    run_pipeline,
 )
 
 __all__ = [
@@ -20,6 +21,6 @@ __all__ = [
     "QueryModel",
     "OpenAIQuery",
     "RAGPipeline",
-    "create_rag_pipeline",
-    "run_rag_pipeline",
+    "create_pipeline",
+    "run_pipeline",
 ]
