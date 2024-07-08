@@ -1,4 +1,4 @@
-# bombay/get_project_templates.py
+# bombay/templates.py
 def get_project_templates():
     return {
         "Basic": """from bombay.pipeline.bombay import create_pipeline, run_pipeline

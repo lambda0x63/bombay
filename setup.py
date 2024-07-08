@@ -6,7 +6,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
     name='bombay',
-    version='0.1.4',
+    version='0.1.5',  
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
@@ -17,7 +17,8 @@ setup(
         'termcolor',
         'colorama',
         'pyfiglet',
-        'rich'        
+        'rich',
+        'pyyaml'
     ],
     author='faith6',
     author_email='root39293@gmail.com',
@@ -29,7 +30,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'bombay=bombay.bombay_cli:main',
+            'bombay=bombay.cli:main',  
         ],
     },
 )

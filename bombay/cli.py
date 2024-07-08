@@ -1,14 +1,17 @@
-# bombay/bombay_cli.py
-import os
+# bombay/cli.py
 import argparse
-import pyfiglet
 from rich.console import Console
 from rich.prompt import Prompt
 from rich.text import Text
 from rich.panel import Panel
 from rich.table import Table
 from string import Template
-from bombay.templates import get_project_templates
+from .utils.config import Config
+from .pipeline import create_pipeline
+from .templates import get_project_templates
+import os
+import pyfiglet
+
 
 console = Console()
 

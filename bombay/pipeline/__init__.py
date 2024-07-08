@@ -1,8 +1,8 @@
 # bombay/pipeline/__init__.py
-from .bombay import VectorDB, HNSWLib, ChromaDB
-from .bombay import EmbeddingModel, OpenAIEmbedding
-from .bombay import QueryModel, OpenAIQuery
-from .bombay import RAGPipeline, create_pipeline, run_pipeline
+from .vector_db import VectorDB, HNSWLib, ChromaDB
+from .embedding_models import EmbeddingModel, OpenAIEmbedding
+from .query_models import QueryModel, OpenAIQuery
+from .rag_pipeline import RAGPipeline, create_pipeline, run_pipeline
 
 __all__ = [
     "VectorDB", "HNSWLib", "ChromaDB",
